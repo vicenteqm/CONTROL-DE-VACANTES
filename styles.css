@@ -911,3 +911,69 @@ footer span:first-child {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
 }
+
+/* Marca MdC y sello visible de actualización de datos */
+.brand-mark.logo-text {
+    font: 800 11px Manrope, sans-serif;
+    letter-spacing: -.45px;
+    line-height: 1;
+    color: #fff
+}
+
+.last-update {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    border-radius: 8px;
+    padding: 7px 10px;
+    min-width: 174px
+}
+
+.last-update svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #555;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0
+}
+
+.last-update strong,
+.last-update small {
+    display: block;
+    white-space: nowrap
+}
+
+.last-update strong {
+    font-size: 9px;
+    font-weight: 700;
+    color: #777;
+    letter-spacing: .15px
+}
+
+.last-update small {
+    font-size: 10px;
+    font-weight: 700;
+    color: #171717;
+    margin-top: 3px
+}
+
+@media(max-width:800px) {
+    .last-update {
+        flex: 1;
+        min-width: 150px;
+        padding: 7px 8px
+    }
+
+    .last-update strong {
+        font-size: 8px
+    }
+
+    .last-update small {
+        font-size: 9px
+    }
+}
