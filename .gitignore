@@ -1,0 +1,12 @@
+# Configuración y logs locales
+config.json
+logs/
+
+# Excel con información de origen: nunca publicar
+*.xlsx
+*.xls
+~$*.xlsx
+
+# Temporales de Python y Excel
+*.tmp
+__pycache__/

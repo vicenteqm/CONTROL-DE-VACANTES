@@ -1,0 +1,7 @@
+{
+  "base_folder": "C:\\CAMBIA\\ESTA\\RUTA\\BASE",
+  "base_pattern": "*BASE*TIENDAS*.xlsx",
+  "attendance_folder": "C:\\CAMBIA\\ESTA\\RUTA\\ASISTENCIA",
+  "attendance_pattern": "*ASISTENCIA*.xlsx",
+  "auto_push": true
+}
