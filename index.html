@@ -1,49 +1,237 @@
 <!doctype html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Dashboard de control de vacantes y cobertura de personal INVEX.">
-<title>Control de Vacantes INVEX</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script defer src="data.js"></script><script defer src="app.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Dashboard de control de vacantes y cobertura de personal INVEX.">
+  <title>Control de Vacantes INVEX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
 </head>
+
 <body>
-<div class="app-shell">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V6h4l4 6 4-6h4v12h-4v-6l-4 6-4-6v6z" fill="currentColor"/></svg></div><div><strong>INVEX</strong><span>CONTROL DE VACANTES</span></div></div>
-  <div class="side-label">MENÚ PRINCIPAL</div>
-  <nav><a class="nav-link active" href="#overview"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="8" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="11" width="7" height="10" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Resumen ejecutivo</a>
-  <a class="nav-link" href="#coverage"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M8 21v-6h8v6M7 10h.01M12 10h.01M17 10h.01"/></svg>Cobertura por tienda</a>
-  <a class="nav-link" href="#status"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Estatus de tiendas</a><a class="nav-link" href="#asistencia"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 5-5"/></svg>Asistencia diaria</a>
-  <a class="nav-link" href="control-cobertura.html"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M7 14h3M14 14h3M7 17h3"/></svg>Control de Cobertura</a></nav>
-  <div class="sidebar-bottom"><div class="data-state"><span class="state-dot"></span><div><strong>Base de análisis</strong><small>Octubre 2026</small></div></div><p>Vista de consulta. Los datos se actualizan al reemplazar los archivos de origen y regenerar el proyecto.</p></div>
-</aside>
-<main class="main-content" id="overview">
-<header class="topbar"><div><div class="eyebrow">ANÁLISIS DE CAPITAL HUMANO</div><h1>Control de vacantes</h1><p class="subtitle">Seguimiento de plantilla requerida y cobertura de personal por tienda.</p></div><div class="top-actions"><span class="period" id="periodLabel"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> <span id="periodText">OCTUBRE 2026</span></span><button id="exportBtn" class="btn-outline"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>Exportar CSV</button></div></header>
-<section class="kpi-grid">
- <article class="kpi-card"><div class="kpi-top"><span>Tiendas operando</span><span class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M3 10h18l-2-6H5zM5 10v10h14V10M9 20v-6h6v6"/></svg></span></div><div class="kpi-value" id="kpiStores">—</div><div class="kpi-foot">Unidades consideradas en el análisis</div></article>
- <article class="kpi-card"><div class="kpi-top"><span>Plantilla requerida</span><span class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6"/></svg></span></div><div class="kpi-value" id="kpiRequired">—</div><div class="kpi-foot">Promotores y sublíderes autorizados</div></article>
- <article class="kpi-card"><div class="kpi-top"><span>Personal activo</span><span class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M20 7 10 17l-5-5"/></svg></span></div><div class="kpi-value" id="kpiActive">—</div><div class="kpi-foot">Estatus ACTIVO y perfil válido</div></article>
- <article class="kpi-card"><div class="kpi-top"><span>Vacantes estimadas</span><span class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10 3h4l8 16H2z"/></svg></span></div><div class="kpi-value" id="kpiGap">—</div><div class="kpi-foot">Faltantes frente a la plantilla requerida</div></article>
-</section>
-<section class="content-grid">
- <article class="panel coverage-panel"><div class="panel-heading"><div><h2>Cobertura general</h2><p>Personal activo vs. plantilla requerida</p></div><span class="tag">OPERANDO</span></div><div class="coverage-body"><div class="donut-wrap"><canvas id="coverageChart" aria-label="Gráfica de cobertura general"></canvas><div class="donut-center"><strong id="coveragePct">—%</strong><span>COBERTURA</span></div></div><div class="legend-block"><div class="legend-row"><span class="legend-dot dark"></span><span>Personal activo</span><strong id="legendActive">—</strong></div><div class="legend-row"><span class="legend-dot light"></span><span>Vacantes estimadas</span><strong id="legendGap">—</strong></div><div class="legend-divider"></div><div class="mini-stat"><span>Promotores</span><strong id="promStat">— / —</strong></div><div class="mini-stat"><span>Sublíderes</span><strong id="subStat">— / —</strong></div></div></div></article>
- <article class="panel"><div class="panel-heading"><div><h2>Vacantes por perfil</h2><p>Brecha entre requeridos y activos</p></div></div><div class="chart-area"><canvas id="profileChart" aria-label="Vacantes por perfil"></canvas></div><div class="chart-note">La plantilla se calcula sumando promotores requeridos y sublíderes.</div></article>
-</section>
-<section class="content-grid lower-grid">
- <article class="panel"><div class="panel-heading"><div><h2>Brecha por región</h2><p>Vacantes estimadas en tiendas operando</p></div></div><div class="chart-area region-chart"><canvas id="regionChart" aria-label="Brecha de vacantes por región"></canvas></div></article>
- <article class="panel status-panel" id="status"><div class="panel-heading"><div><h2>Estatus de tiendas</h2><p>Unidades fuera del universo de cobertura</p></div></div><div id="statusList" class="status-list"></div><div class="status-foot">Solo las tiendas con estatus OPERANDO participan en los KPIs de cobertura.</div></article>
-</section>
-<section class="content-grid attendance-grid" id="asistencia">
- <article class="panel"><div class="panel-heading"><div><h2>Asistencia diaria</h2><p>Distribución de códigos capturados por día</p></div><span class="tag">PERSONAL ELEGIBLE ACTIVO</span></div><div class="chart-area attendance-chart"><canvas id="attendanceChart" aria-label="Asistencia diaria por tipo de incidencia"></canvas></div><div class="chart-note">El gráfico detecta automáticamente los días que ya tengan códigos de asistencia registrados. Los días vacíos no se muestran.</div></article>
- <article class="panel"><div class="panel-heading"><div><h2>Claves de asistencia</h2><p>Conteo acumulado de los días capturados</p></div></div><div id="attendanceSummary" class="attendance-summary"></div><div class="status-foot">Se cuentan los códigos registrados para personal con estatus ACTIVO y perfil PROMOTOR DE CREDITO o SUBLIDER. Un mismo empleado puede contar en varios días.</div></article>
-</section>
-<section class="panel table-panel" id="coverage"><div class="panel-heading table-heading"><div><h2>Detalle de cobertura por tienda</h2><p>Consulta, filtra y exporta el detalle de plantilla.</p></div><div class="table-total" id="tableTotal">— tiendas</div></div>
-<div class="filters"><label class="searchbox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="searchInput" type="search" placeholder="Buscar tienda, determinante o ciudad..." aria-label="Buscar tienda"></label><select id="regionFilter" aria-label="Filtrar por región"><option value="">Todas las regiones</option></select><select id="profileFilter" aria-label="Filtrar por brecha"><option value="">Todas las coberturas</option><option value="gap">Con vacantes</option><option value="full">Plantilla completa</option><option value="zero">Sin personal activo</option></select></div>
-<div class="table-wrap"><table><thead><tr><th>Tienda / determinante</th><th>Región</th><th>Promotores</th><th>Sublíderes</th><th>Plantilla</th><th>Activos</th><th>Vacantes</th><th>Cobertura</th></tr></thead><tbody id="storeTable"></tbody></table></div><div class="table-footer"><span id="tableRange">—</span><div class="pagination"><button id="prevPage" class="page-btn" aria-label="Página anterior">Anterior</button><span id="pageLabel">1 / 1</span><button id="nextPage" class="page-btn" aria-label="Página siguiente">Siguiente</button></div></div></section>
-<footer><span>CONTROL DE VACANTES INVEX</span><span id="footerUpdate">Indicadores generados a partir de los archivos fuente.</span></footer>
-</main></div>
-</body></html>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark logo-text" aria-label="MdC">MdC</div>
+        <div><strong>INVEX</strong><span>CONTROL DE VACANTES</span></div>
+      </div>
+      <div class="side-label">MENÚ PRINCIPAL</div>
+      <nav><a class="nav-link active" href="#overview"><svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="8" rx="1" />
+            <rect x="14" y="3" width="7" height="5" rx="1" />
+            <rect x="14" y="11" width="7" height="10" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+          </svg>Resumen ejecutivo</a>
+        <a class="nav-link" href="#coverage"><svg viewBox="0 0 24 24">
+            <path d="M3 21V8l9-5 9 5v13M8 21v-6h8v6M7 10h.01M12 10h.01M17 10h.01" />
+          </svg>Cobertura por tienda</a>
+        <a class="nav-link" href="#status"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>Estatus de tiendas</a><a class="nav-link" href="#asistencia"><svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="17" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 5-5" />
+          </svg>Asistencia diaria</a>
+        <a class="nav-link" href="control-cobertura.html"><svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="17" rx="2" />
+            <path d="M8 2v4M16 2v4M3 10h18M7 14h3M14 14h3M7 17h3" />
+          </svg>Control de Cobertura</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="data-state"><span class="state-dot"></span>
+          <div><strong>Base de análisis</strong><small>Octubre 2026</small></div>
+        </div>
+        <p>Vista de consulta. Los datos se actualizan al reemplazar los archivos de origen y regenerar el proyecto.</p>
+      </div>
+    </aside>
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">ANÁLISIS DE CAPITAL HUMANO</div>
+          <h1>Control de vacantes</h1>
+          <p class="subtitle">Seguimiento de plantilla requerida y cobertura de personal por tienda.</p>
+        </div>
+        <div class="top-actions">
+          <div class="last-update" title="Fecha y hora en que se procesaron los datos publicados"><svg
+              viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg><span><strong>Última actualización</strong><small id="lastUpdateText">Consultando
+                datos…</small></span></div><span class="period" id="periodLabel"><svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M16 3v4M8 3v4M3 10h18" />
+            </svg> <span id="periodText">OCTUBRE 2026</span></span><button id="exportBtn" class="btn-outline"><svg
+              viewBox="0 0 24 24">
+              <path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4" />
+            </svg>Exportar CSV</button>
+        </div>
+      </header>
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <div class="kpi-top"><span>Tiendas operando</span><span class="kpi-icon"><svg viewBox="0 0 24 24">
+                <path d="M3 10h18l-2-6H5zM5 10v10h14V10M9 20v-6h6v6" />
+              </svg></span></div>
+          <div class="kpi-value" id="kpiStores">—</div>
+          <div class="kpi-foot">Unidades consideradas en el análisis</div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>Plantilla requerida</span><span class="kpi-icon"><svg viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" />
+              </svg></span></div>
+          <div class="kpi-value" id="kpiRequired">—</div>
+          <div class="kpi-foot">Promotores y sublíderes autorizados</div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>Personal activo</span><span class="kpi-icon"><svg viewBox="0 0 24 24">
+                <path d="M20 7 10 17l-5-5" />
+              </svg></span></div>
+          <div class="kpi-value" id="kpiActive">—</div>
+          <div class="kpi-foot">Estatus ACTIVO y perfil válido</div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>Vacantes estimadas</span><span class="kpi-icon"><svg viewBox="0 0 24 24">
+                <path d="M12 9v4m0 4h.01M10 3h4l8 16H2z" />
+              </svg></span></div>
+          <div class="kpi-value" id="kpiGap">—</div>
+          <div class="kpi-foot">Faltantes frente a la plantilla requerida</div>
+        </article>
+      </section>
+      <section class="content-grid">
+        <article class="panel coverage-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Cobertura general</h2>
+              <p>Personal activo vs. plantilla requerida</p>
+            </div><span class="tag">OPERANDO</span>
+          </div>
+          <div class="coverage-body">
+            <div class="donut-wrap"><canvas id="coverageChart" aria-label="Gráfica de cobertura general"></canvas>
+              <div class="donut-center"><strong id="coveragePct">—%</strong><span>COBERTURA</span></div>
+            </div>
+            <div class="legend-block">
+              <div class="legend-row"><span class="legend-dot dark"></span><span>Personal activo</span><strong
+                  id="legendActive">—</strong></div>
+              <div class="legend-row"><span class="legend-dot light"></span><span>Vacantes estimadas</span><strong
+                  id="legendGap">—</strong></div>
+              <div class="legend-divider"></div>
+              <div class="mini-stat"><span>Promotores</span><strong id="promStat">— / —</strong></div>
+              <div class="mini-stat"><span>Sublíderes</span><strong id="subStat">— / —</strong></div>
+            </div>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Vacantes por perfil</h2>
+              <p>Brecha entre requeridos y activos</p>
+            </div>
+          </div>
+          <div class="chart-area"><canvas id="profileChart" aria-label="Vacantes por perfil"></canvas></div>
+          <div class="chart-note">La plantilla se calcula sumando promotores requeridos y sublíderes.</div>
+        </article>
+      </section>
+      <section class="content-grid lower-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Brecha por región</h2>
+              <p>Vacantes estimadas en tiendas operando</p>
+            </div>
+          </div>
+          <div class="chart-area region-chart"><canvas id="regionChart"
+              aria-label="Brecha de vacantes por región"></canvas></div>
+        </article>
+        <article class="panel status-panel" id="status">
+          <div class="panel-heading">
+            <div>
+              <h2>Estatus de tiendas</h2>
+              <p>Unidades fuera del universo de cobertura</p>
+            </div>
+          </div>
+          <div id="statusList" class="status-list"></div>
+          <div class="status-foot">Solo las tiendas con estatus OPERANDO participan en los KPIs de cobertura.</div>
+        </article>
+      </section>
+      <section class="content-grid attendance-grid" id="asistencia">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Asistencia diaria</h2>
+              <p>Distribución de códigos capturados por día</p>
+            </div><span class="tag">PERSONAL ELEGIBLE ACTIVO</span>
+          </div>
+          <div class="chart-area attendance-chart"><canvas id="attendanceChart"
+              aria-label="Asistencia diaria por tipo de incidencia"></canvas></div>
+          <div class="chart-note">El gráfico detecta automáticamente los días que ya tengan códigos de asistencia
+            registrados. Los días vacíos no se muestran.</div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Claves de asistencia</h2>
+              <p>Conteo acumulado de los días capturados</p>
+            </div>
+          </div>
+          <div id="attendanceSummary" class="attendance-summary"></div>
+          <div class="status-foot">Se cuentan los códigos registrados para personal con estatus ACTIVO y perfil PROMOTOR
+            DE CREDITO o SUBLIDER. Un mismo empleado puede contar en varios días.</div>
+        </article>
+      </section>
+      <section class="panel table-panel" id="coverage">
+        <div class="panel-heading table-heading">
+          <div>
+            <h2>Detalle de cobertura por tienda</h2>
+            <p>Consulta, filtra y exporta el detalle de plantilla.</p>
+          </div>
+          <div class="table-total" id="tableTotal">— tiendas</div>
+        </div>
+        <div class="filters"><label class="searchbox"><svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m16 16 5 5" />
+            </svg><input id="searchInput" type="search" placeholder="Buscar tienda, determinante o ciudad..."
+              aria-label="Buscar tienda"></label><select id="regionFilter" aria-label="Filtrar por región">
+            <option value="">Todas las regiones</option>
+          </select><select id="profileFilter" aria-label="Filtrar por brecha">
+            <option value="">Todas las coberturas</option>
+            <option value="gap">Con vacantes</option>
+            <option value="full">Plantilla completa</option>
+            <option value="zero">Sin personal activo</option>
+          </select></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tienda / determinante</th>
+                <th>Región</th>
+                <th>Promotores</th>
+                <th>Sublíderes</th>
+                <th>Plantilla</th>
+                <th>Activos</th>
+                <th>Vacantes</th>
+                <th>Cobertura</th>
+              </tr>
+            </thead>
+            <tbody id="storeTable"></tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span id="tableRange">—</span>
+          <div class="pagination"><button id="prevPage" class="page-btn"
+              aria-label="Página anterior">Anterior</button><span id="pageLabel">1 / 1</span><button id="nextPage"
+              class="page-btn" aria-label="Página siguiente">Siguiente</button></div>
+        </div>
+      </section>
+      <footer><span>CONTROL DE VACANTES INVEX</span><span id="footerUpdate">Indicadores generados a partir de los
+          archivos fuente.</span></footer>
+    </main>
+  </div>
+</body>
+
+</html>
