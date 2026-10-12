@@ -12,7 +12,14 @@ function init(){
  const regs=[...D.regions].sort((a,b)=>b.gap-a.gap).slice(0,8);
  makeChart('regionChart','bar',{labels:regs.map(r=>r.region.replace('REGION ','R. ')),datasets:[{label:'Vacantes',data:regs.map(r=>r.gap),backgroundColor:'#222',borderRadius:4,barThickness:13}]},{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{grid:{color:'#eee'},ticks:{font:{size:9},color:'#888'},border:{display:false},beginAtZero:true},y:{grid:{display:false},ticks:{font:{size:9},color:'#555'},border:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' Vacantes: '+fmt(c.raw)}}}});
  renderAttendance();renderStatuses();populateRegions();renderTable();
- if(D.meta && D.meta.generatedDisplay){$('footerUpdate').textContent='Última actualización de datos: '+D.meta.generatedDisplay;}
+ if(D.meta && D.meta.generatedDisplay){
+  $('footerUpdate').textContent='Última actualización de datos: '+D.meta.generatedDisplay;
+  const updateNode=$('lastUpdateText');
+  if(updateNode) updateNode.textContent=D.meta.generatedDisplay;
+ } else {
+  const updateNode=$('lastUpdateText');
+  if(updateNode) updateNode.textContent='Sin registro';
+ }
  if(D.meta && D.meta.generated){const dt=new Date(D.meta.generated);if(!Number.isNaN(dt.getTime()))$('periodText').textContent=dt.toLocaleDateString('es-MX',{month:'long',year:'numeric'}).toLocaleUpperCase('es-MX');}
 }
 function renderAttendance(){
